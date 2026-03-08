@@ -1,0 +1,88 @@
+-- ]] 
+ -- OH YEAH MR KRABS, AAAAAH Destroyer remake
+ -- Made by BuggyXtown/Zyphor
+-- ]]
+
+c = script:Clone()
+c.Parent = game.Lighting
+s = Instance.new("Sky")
+s.Name = "loltroll"
+s.SkyboxBk = "http://www.roblox.com/asset/?id=91205662133868"
+s.SkyboxDn = "http://www.roblox.com/asset/?id=135530821244826"
+s.SkyboxFt = "http://www.roblox.com/asset/?id=102772815015948"
+s.SkyboxLf = "http://www.roblox.com/asset/?id=137243866716381"
+s.SkyboxRt = "http://www.roblox.com/asset/?id=83967855490319"
+s.SkyboxUp = "http://www.roblox.com/asset/?id=130331654255734"
+s.Parent = game.Lighting
+
+local function aplicarParticula(character)
+    local torso = character:FindFirstChild("Torso") or character:FindFirstChild("UpperTorso")
+    
+    if torso then
+        local pe = Instance.new("ParticleEmitter")
+        pe.Parent = torso
+        pe.Texture = "http://www.roblox.com/asset/?id=102772815015948"
+        pe.VelocitySpread = 5
+        
+        pe.Name = "EfeitoGlobal" 
+    end
+end
+
+for _, player in ipairs(game.Players:GetPlayers()) do
+    if player.Character then
+        aplicarParticula(player.Character)
+    end
+    
+    player.CharacterAdded:Connect(aplicarParticula)
+end
+
+game.Players.PlayerAdded:Connect(function(player)
+    player.CharacterAdded:Connect(aplicarParticula)
+end)
+
+
+
+for _, v in pairs(game.Workspace:GetChildren()) do
+    if v:IsA("Sound") then
+        v:Stop()
+        v:Destroy()
+    end
+end
+
+local t = "rbxassetid://135530821244826"
+
+local p = game.Players:GetPlayers()
+
+local w = game.Workspace:GetChildren()
+
+for i,v in pairs(p) do
+
+    local pe = Instance.new("ParticleEmitter", v.Character.Torso)
+
+    pe.Texture = t
+
+    pe.VelocitySpread = 100
+
+end
+
+for i=1,#w do
+
+    if w[i]:IsA("BasePart") then
+
+        local pe = Instance.new("ParticleEmitter", w[i])
+
+        pe.Texture = t
+
+        pe.VelocitySpread = 5
+
+    end
+
+end
+
+local sound = Instance.new("Sound")
+sound.SoundId = "rbxassetid://87663330165612"
+sound.Volume = 10
+sound.Looped = true
+sound.Parent = workspace
+sound.Pitch = 0.1
+sound:Play()
